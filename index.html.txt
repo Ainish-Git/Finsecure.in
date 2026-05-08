@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Finsecure — Your Money. Our Expertise.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0b1f3a;
+    --navy-mid: #122d52;
+    --emerald: #1a7c4f;
+    --emerald-light: #22a267;
+    --emerald-pale: #e8f5ef;
+    --gold: #d4a017;
+    --gold-light: #f0c040;
+    --crimson: #c0392b;
+    --crimson-light: #e74c3c;
+    --white: #ffffff;
+    --off-white: #f8faf9;
+    --text-dark: #0d1f35;
+    --text-mid: #3d5470;
+    --text-light: #7a92ab;
+    --border: #dce8f0;
+    --shadow: 0 8px 40px rgba(11,31,58,0.10);
+    --shadow-md: 0 16px 60px rgba(11,31,58,0.16);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    background: rgba(11,31,58,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 0 5%;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
+
+  .logo {
+    display: flex; align-items: center; gap: 14px; text-decoration: none;
+  }
+  .logo-icon {
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, var(--emerald-light), var(--gold));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900; font-size: 22px; color: white;
+    box-shadow: 0 4px 16px rgba(26,124,79,0.4);
+  }
+  .logo-text { line-height: 1.1; }
+  .logo-text .brand { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: 1px; }
+  .logo-text .tagline { font-size: 10px; color: var(--gold-light); letter-spacing: 0.5px; font-weight: 400; }
+
+  .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 14px; font-weight: 500;
+    padding: 8px 14px; border-radius: 8px;
+    transition: all .2s;
+    position: relative;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-links a.has-dropdown::after { content: '▾'; margin-left: 4px; font-size: 10px; }
+
+  .nav-ctas { display: flex; gap: 10px; }
+  .btn-outline-white {
+    padding: 9px 20px; border-radius: 8px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: white; font-size: 14px; font-weight: 500;
+    background: transparent; cursor: pointer;
+    transition: all .2s; text-decoration: none;
+  }
+  .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; }
+  .btn-fill-gold {
+    padding: 9px 22px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--navy); font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer;
+    transition: all .2s; text-decoration: none;
+    box-shadow: 0 4px 16px rgba(212,160,23,0.3);
+  }
+  .btn-fill-gold:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(212,160,23,0.4); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, #0e3d20 100%);
+    display: flex; align-items: center;
+    padding: 100px 5% 60px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 80% 50%, rgba(26,124,79,0.25) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 20% 80%, rgba(212,160,23,0.12) 0%, transparent 60%);
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 60px; align-items: center;
+    max-width: 1280px; margin: 0 auto; width: 100%;
+    position: relative; z-index: 1;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(26,124,79,0.2); border: 1px solid rgba(26,124,79,0.4);
+    border-radius: 100px; padding: 6px 14px;
+    color: #5de8a0; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.5px; margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge span { width: 7px; height: 7px; background: #5de8a0; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.4} }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 5vw, 68px);
+    font-weight: 900; color: white; line-height: 1.1;
+    margin-bottom: 22px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title .accent { color: var(--gold-light); }
+  .hero-title .accent2 { color: #5de8a0; }
+
+  .hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.68); line-height: 1.7;
+    margin-bottom: 40px; max-width: 500px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.8s 0.3s ease both; }
+  .btn-hero-primary {
+    padding: 14px 30px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--emerald-light), #16a34a);
+    color: white; font-size: 16px; font-weight: 600;
+    border: none; cursor: pointer; text-decoration: none;
+    box-shadow: 0 6px 28px rgba(26,124,79,0.4);
+    transition: all .25s;
+  }
+  .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(26,124,79,0.5); }
+  .btn-hero-secondary {
+    padding: 14px 30px; border-radius: 10px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: white; font-size: 16px; font-weight: 500;
+    background: rgba(255,255,255,0.06); cursor: pointer;
+    text-decoration: none; transition: all .25s;
+  }
+  .btn-hero-secondary:hover { background: rgba(255,255,255,0.12); }
+
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 52px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .hero-stat .num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 700; color: var(--gold-light); }
+  .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* Hero right — animated finance card */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    animation: fadeIn 1s 0.5s ease both;
+  }
+  .hero-card-stack { position: relative; width: 380px; height: 420px; }
+
+  .hcard {
+    position: absolute; border-radius: 20px; padding: 28px;
+    backdrop-filter: blur(10px);
+  }
+  .hcard-main {
+    width: 340px; top: 40px; left: 20px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: floatCard 5s ease-in-out infinite;
+  }
+  @keyframes floatCard { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+  .hcard-badge { font-size: 11px; color: #5de8a0; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 16px; }
+  .hcard-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .hcard-value { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .hcard-sub { font-size: 12px; color: #5de8a0; }
+  .hcard-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 18px 0; }
+  .hcard-row { display: flex; justify-content: space-between; align-items: center; }
+  .hcard-row-lbl { font-size: 13px; color: rgba(255,255,255,0.5); }
+  .hcard-row-val { font-size: 14px; font-weight: 600; color: white; }
+  .hcard-bar { height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 10px; overflow: hidden; }
+  .hcard-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--emerald-light), var(--gold)); width: 72%; }
+
+  .hcard-mini {
+    width: 200px; bottom: 20px; right: 0;
+    background: rgba(26,124,79,0.9);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 10px 40px rgba(26,124,79,0.3);
+    animation: floatCard2 6s 1.5s ease-in-out infinite;
+  }
+  @keyframes floatCard2 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .hcard-mini .mini-lbl { font-size: 11px; color: rgba(255,255,255,0.7); margin-bottom: 6px; }
+  .hcard-mini .mini-val { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: white; }
+  .hcard-mini .mini-sub { font-size: 11px; color: #a8ffcc; margin-top: 4px; }
+
+  /* ── GOALS BAR ── */
+  .goals-bar {
+    background: var(--navy);
+    padding: 0;
+  }
+  .goals-inner {
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    max-width: 1280px; margin: 0 auto;
+  }
+  .goal-item {
+    padding: 28px 16px; text-align: center; cursor: pointer;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    transition: all .25s; position: relative;
+  }
+  .goal-item:last-child { border-right: none; }
+  .goal-item:hover, .goal-item.active { background: var(--emerald); }
+  .goal-item.active::after {
+    content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    border: 8px solid transparent; border-bottom: none;
+    border-top: 8px solid var(--emerald);
+  }
+  .goal-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+  .goal-text { font-size: 12px; color: rgba(255,255,255,0.8); font-weight: 500; line-height: 1.4; }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 90px 5%; }
+  .section-inner { max-width: 1280px; margin: 0 auto; }
+  .section-tag { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--emerald-light); text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 4vw, 46px); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 18px; }
+  .section-title .highlight { color: var(--emerald-light); }
+  .section-title .gold { color: var(--gold); }
+  .section-desc { font-size: 16px; color: var(--text-mid); line-height: 1.75; max-width: 560px; margin-bottom: 44px; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--off-white); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .service-card {
+    background: white; border-radius: 20px; padding: 36px 30px;
+    border: 1px solid var(--border);
+    transition: all .3s; position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--emerald), var(--emerald-light));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform .3s;
+  }
+  .service-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: transparent; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--emerald-pale); display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin-bottom: 20px;
+  }
+  .service-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+  .service-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 20px; }
+  .service-link { font-size: 14px; color: var(--emerald-light); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: gap .2s; }
+  .service-link:hover { gap: 10px; }
+
+  /* ── TAX FREE INCOME ── */
+  .taxfree { background: white; }
+  .taxfree-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: start; }
+  .route-accordion { margin-bottom: 12px; }
+  .route-btn {
+    width: 100%; text-align: left; padding: 16px 22px;
+    background: var(--navy); color: white;
+    border: none; border-radius: 12px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 15px; font-weight: 500; transition: all .25s;
+  }
+  .route-btn:hover, .route-btn.open { background: var(--emerald); }
+  .route-btn .tag { font-size: 11px; background: rgba(255,255,255,0.15); padding: 3px 10px; border-radius: 100px; }
+  .route-btn .arrow { transition: transform .3s; }
+  .route-btn.open .arrow { transform: rotate(90deg); }
+  .route-content {
+    display: none; padding: 20px 22px;
+    background: var(--off-white); border-radius: 0 0 12px 12px;
+    border: 1px solid var(--border); border-top: none;
+    font-size: 14px; color: var(--text-mid); line-height: 1.7;
+    margin-top: -8px;
+  }
+  .route-content.open { display: block; }
+  .route-footer { margin-top: 12px; display: flex; gap: 16px; }
+  .route-footer a { font-size: 13px; color: var(--emerald-light); font-weight: 600; text-decoration: none; }
+
+  /* SIP Calculator */
+  .calc-box {
+    background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+    border-radius: 24px; padding: 36px; color: white;
+    position: sticky; top: 100px;
+  }
+  .calc-title { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+  .calc-sub { font-size: 13px; color: rgba(255,255,255,0.6); margin-bottom: 28px; }
+  .calc-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 8px; font-weight: 500; }
+  .calc-display { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--gold-light); margin-bottom: 16px; }
+  .calc-range {
+    width: 100%; -webkit-appearance: none;
+    height: 5px; background: rgba(255,255,255,0.15); border-radius: 10px; outline: none; margin-bottom: 20px;
+  }
+  .calc-range::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    background: var(--gold); border-radius: 50%; cursor: pointer;
+    box-shadow: 0 0 8px rgba(212,160,23,0.5);
+  }
+  .calc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; margin-top: 8px; margin-bottom: 24px; }
+  .calc-slab { text-align: center; padding: 14px; background: rgba(255,255,255,0.05); }
+  .calc-slab-num { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--gold-light); }
+  .calc-slab-lbl { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; }
+  .calc-note { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
+  /* SIP returns calculator */
+  .sip-section { background: var(--off-white); }
+  .sip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .sip-calc-ui {
+    background: white; border-radius: 24px; padding: 36px;
+    box-shadow: var(--shadow); border: 1px solid var(--border);
+  }
+  .sip-field { margin-bottom: 24px; }
+  .sip-field label { display: block; font-size: 13px; color: var(--text-mid); font-weight: 500; margin-bottom: 8px; }
+  .sip-field input[type=range] {
+    width: 100%; -webkit-appearance: none; height: 5px;
+    background: var(--border); border-radius: 10px; outline: none;
+  }
+  .sip-field input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    background: var(--emerald-light); border-radius: 50%; cursor: pointer;
+  }
+  .sip-field-val { font-size: 20px; font-weight: 700; color: var(--navy); float: right; margin-top: -6px; }
+  .sip-result {
+    background: linear-gradient(135deg, var(--emerald), var(--navy));
+    border-radius: 16px; padding: 28px; color: white; margin-top: 8px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .sip-res-item .lbl { font-size: 11px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .sip-res-item .val { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
+  .sip-res-item .val.gold { color: var(--gold-light); }
+
+  /* ── KNOWLEDGE CENTER ── */
+  .knowledge { background: white; }
+  .knowledge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .k-card {
+    border-radius: 20px; overflow: hidden; border: 1px solid var(--border);
+    transition: all .3s; background: white;
+  }
+  .k-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+  .k-thumb {
+    height: 180px; position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; font-size: 60px;
+  }
+  .k-thumb-mf { background: linear-gradient(135deg, #0b1f3a, #1a7c4f); }
+  .k-thumb-sip { background: linear-gradient(135deg, #1a3a5c, #d4a017); }
+  .k-thumb-tax { background: linear-gradient(135deg, #c0392b, #0b1f3a); }
+  .k-tag {
+    position: absolute; top: 14px; left: 14px;
+    background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+    color: white; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 100px;
+  }
+  .k-body { padding: 22px; }
+  .k-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.4; }
+  .k-desc { font-size: 13px; color: var(--text-mid); line-height: 1.65; margin-bottom: 16px; }
+  .k-meta { display: flex; align-items: center; justify-content: space-between; }
+  .k-read { font-size: 13px; color: var(--emerald-light); font-weight: 600; text-decoration: none; }
+  .k-time { font-size: 12px; color: var(--text-light); }
+
+  /* ── WHY US ── */
+  .why { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); padding: 90px 5%; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 70px; align-items: center; max-width: 1280px; margin: 0 auto; }
+  .why .section-title { color: white; }
+  .why .section-desc { color: rgba(255,255,255,0.6); }
+  .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .why-feat {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 24px;
+    transition: all .25s;
+  }
+  .why-feat:hover { background: rgba(26,124,79,0.2); border-color: rgba(26,124,79,0.3); }
+  .why-feat-icon { font-size: 28px; margin-bottom: 12px; }
+  .why-feat-title { font-size: 15px; font-weight: 600; color: white; margin-bottom: 6px; }
+  .why-feat-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  .why-visual { position: relative; }
+  .trust-card {
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 24px; padding: 36px; text-align: center;
+    backdrop-filter: blur(10px);
+  }
+  .trust-numbers { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+  .trust-num { border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; }
+  .trust-num .n { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--gold-light); }
+  .trust-num .l { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 4px; }
+  .trust-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .trust-badge {
+    background: rgba(26,124,79,0.2); border: 1px solid rgba(26,124,79,0.4);
+    border-radius: 100px; padding: 8px 16px;
+    color: #5de8a0; font-size: 12px; font-weight: 600;
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--off-white); }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .testi-card {
+    background: white; border-radius: 20px; padding: 30px;
+    border: 1px solid var(--border); transition: all .3s;
+    position: relative;
+  }
+  .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .testi-card::before {
+    content: '"'; position: absolute; top: 20px; right: 24px;
+    font-family: 'Playfair Display', serif; font-size: 80px; color: var(--emerald-pale);
+    line-height: 1; font-weight: 900;
+  }
+  .testi-stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+  .testi-text { font-size: 14px; color: var(--text-mid); line-height: 1.75; margin-bottom: 22px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 700; color: white;
+  }
+  .testi-name { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .testi-role { font-size: 12px; color: var(--text-light); }
+
+  /* ── CONTACT ── */
+  .contact { background: white; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 70px; align-items: start; }
+  .contact-info-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 36px; }
+  .contact-info-card {
+    display: flex; align-items: center; gap: 16px;
+    padding: 18px 20px; border-radius: 14px;
+    background: var(--off-white); border: 1px solid var(--border);
+  }
+  .contact-info-icon {
+    width: 44px; height: 44px; min-width: 44px; border-radius: 12px;
+    background: var(--emerald-pale); display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+  }
+  .contact-info-label { font-size: 12px; color: var(--text-light); margin-bottom: 2px; }
+  .contact-info-value { font-size: 14px; font-weight: 600; color: var(--navy); }
+
+  .contact-form { background: var(--off-white); border-radius: 24px; padding: 40px; border: 1px solid var(--border); }
+  .form-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .form-sub { font-size: 14px; color: var(--text-mid); margin-bottom: 28px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 13px; color: var(--text-mid); font-weight: 500; margin-bottom: 6px; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px 14px; border-radius: 10px;
+    border: 1.5px solid var(--border); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; color: var(--text-dark); background: white;
+    outline: none; transition: border-color .2s;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--emerald-light); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .btn-submit {
+    width: 100%; padding: 14px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+    color: white; font-size: 15px; font-weight: 600;
+    border: none; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(26,124,79,0.3); transition: all .25s;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(26,124,79,0.4); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.6);
+    padding: 60px 5% 30px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1280px; margin: 0 auto 48px; }
+  .footer-brand .logo { margin-bottom: 16px; }
+  .footer-brand p { font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+    cursor: pointer; transition: all .2s; text-decoration: none; color: white;
+  }
+  .social-btn:hover { background: var(--emerald); border-color: var(--emerald); }
+  .footer-heading { font-size: 13px; font-weight: 700; color: white; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { color: rgba(255,255,255,0.55); text-decoration: none; font-size: 14px; transition: color .2s; }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom { max-width: 1280px; margin: 0 auto; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 13px; }
+  .sebi-badge {
+    background: rgba(26,124,79,0.15); border: 1px solid rgba(26,124,79,0.3);
+    border-radius: 100px; padding: 6px 14px;
+    color: #5de8a0; font-size: 12px; font-weight: 600;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s cubic-bezier(0.25,0.8,0.25,1); }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── MOBILE MENU ── */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; transition: all .3s; }
+
+  /* ── CTA STRIP ── */
+  .cta-strip {
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+    padding: 60px 5%; text-align: center;
+  }
+  .cta-strip h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; margin-bottom: 12px; }
+  .cta-strip p { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 32px; }
+  .cta-strip-btns { display: flex; gap: 14px; justify-content: center; }
+  .btn-white { padding: 14px 32px; border-radius: 10px; background: white; color: var(--emerald); font-size: 15px; font-weight: 700; border: none; cursor: pointer; text-decoration: none; transition: all .25s; box-shadow: 0 6px 24px rgba(0,0,0,0.15); }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.2); }
+  .btn-outline-white2 { padding: 14px 32px; border-radius: 10px; border: 2px solid rgba(255,255,255,0.5); color: white; font-size: 15px; font-weight: 600; background: transparent; cursor: pointer; text-decoration: none; transition: all .25s; }
+  .btn-outline-white2:hover { background: rgba(255,255,255,0.1); border-color: white; }
+
+  @media (max-width: 1024px) {
+    .hero-grid, .services-grid { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .goals-inner { grid-template-columns: repeat(3,1fr); }
+    .taxfree-grid, .sip-grid, .contact-grid, .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .knowledge-grid, .testi-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 640px) {
+    .goals-inner { grid-template-columns: repeat(2,1fr); }
+    .hero-stats { gap: 20px; }
+    .why-features { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .trust-numbers { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a class="logo" href="#">
+    <div class="logo-icon">F</div>
+    <div class="logo-text">
+      <div class="brand">FINSECURE</div>
+      <div class="tagline">Your Money. Our Expertise.</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Mutual Fund</a></li>
+    <li><a href="#sip">Plan &amp; Invest</a></li>
+    <li><a href="#taxfree">Fixed Income</a></li>
+    <li><a href="#taxfree">Insurance</a></li>
+    <li><a href="#taxfree">Taxation</a></li>
+    <li><a href="#knowledge">Knowledge</a></li>
+  </ul>
+  <div class="nav-ctas">
+    <a class="btn-outline-white" href="#contact">Login</a>
+    <a class="btn-fill-gold" href="#contact">Register Free</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div>
+      <div class="hero-badge"><span></span> SEBI Registered Investment Advisor</div>
+      <h1 class="hero-title">
+        Safe, Secure<br>and <span class="accent">Better</span><br>
+        <span class="accent2">Returns</span> Await
+      </h1>
+      <p class="hero-sub">India's trusted financial advisory platform. Mutual Funds, Tax Planning, Insurance, and Smart Investments — all in one place. Save 72.8% more tax compared to bank FDs.</p>
+      <div class="hero-ctas">
+        <a class="btn-hero-primary" href="#sip">Start Investing ›</a>
+        <a class="btn-hero-secondary" href="#services">Explore Services</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">50K+</div><div class="lbl">Happy Investors</div></div>
+        <div class="hero-stat"><div class="num">₹500Cr+</div><div class="lbl">Assets Managed</div></div>
+        <div class="hero-stat"><div class="num">18+</div><div class="lbl">Years Experience</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="hcard hcard-main">
+          <div class="hcard-badge">● PORTFOLIO OVERVIEW</div>
+          <div class="hcard-label">Total Portfolio Value</div>
+          <div class="hcard-value">₹12,84,500</div>
+          <div class="hcard-sub">↑ +18.4% this year</div>
+          <div class="hcard-divider"></div>
+          <div class="hcard-row">
+            <div class="hcard-row-lbl">Mutual Funds</div>
+            <div class="hcard-row-val">₹7,20,000</div>
+          </div>
+          <div class="hcard-bar"><div class="hcard-fill"></div></div>
+          <div class="hcard-row" style="margin-top:12px">
+            <div class="hcard-row-lbl">Fixed Income</div>
+            <div class="hcard-row-val">₹3,15,000</div>
+          </div>
+          <div class="hcard-bar"><div class="hcard-fill" style="width:45%;background:linear-gradient(90deg,#d4a017,#f0c040)"></div></div>
+          <div class="hcard-row" style="margin-top:12px">
+            <div class="hcard-row-lbl">Insurance</div>
+            <div class="hcard-row-val">₹2,49,500</div>
+          </div>
+          <div class="hcard-bar"><div class="hcard-fill" style="width:28%;background:linear-gradient(90deg,#c0392b,#e74c3c)"></div></div>
+        </div>
+        <div class="hcard hcard-mini">
+          <div class="mini-lbl">Monthly SIP</div>
+          <div class="mini-val">₹15,000</div>
+          <div class="mini-sub">↑ Expected 14.2% CAGR</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOALS BAR -->
+<div class="goals-bar">
+  <div class="goals-inner">
+    <div class="goal-item active" onclick="setGoal(this)">
+      <span class="goal-icon">💡</span>
+      <div class="goal-text">Help me earn tax free income</div>
+    </div>
+    <div class="goal-item" onclick="setGoal(this)">
+      <span class="goal-icon">⚖️</span>
+      <div class="goal-text">Looking for alternative to bank deposits</div>
+    </div>
+    <div class="goal-item" onclick="setGoal(this)">
+      <span class="goal-icon">🛡️</span>
+      <div class="goal-text">Create Emergency fund now</div>
+    </div>
+    <div class="goal-item" onclick="setGoal(this)">
+      <span class="goal-icon">👑</span>
+      <div class="goal-text">Invest to earn high returns</div>
+    </div>
+    <div class="goal-item" onclick="setGoal(this)">
+      <span class="goal-icon">⭐</span>
+      <div class="goal-text">Invest in Trending funds</div>
+    </div>
+    <div class="goal-item" onclick="setGoal(this)">
+      <span class="goal-icon">♟️</span>
+      <div class="goal-text">Help me decide the right fund</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-tag">What We Offer</div>
+      <h2 class="section-title">Complete <span class="highlight">Financial Solutions</span><br>Under One Roof</h2>
+      <p class="section-desc">From mutual funds to insurance, tax planning to fixed income — we provide expert guidance tailored to your financial goals.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon">📈</div>
+        <div class="service-title">Mutual Funds</div>
+        <div class="service-desc">Access 2000+ mutual fund schemes. Our experts help you build a diversified portfolio aligned with your risk appetite and investment horizon. SIP starting at just ₹500/month.</div>
+        <a class="service-link" href="#">Explore Funds →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">💰</div>
+        <div class="service-title">Fixed Income</div>
+        <div class="service-desc">FDs, Bonds, NCDs, and Government Securities offering better returns than traditional savings. Lock in guaranteed returns up to 9.5% per annum with capital safety.</div>
+        <a class="service-link" href="#">View Options →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🛡️</div>
+        <div class="service-title">Insurance</div>
+        <div class="service-desc">Term Life, Health, and ULIP plans from top insurers. Get comprehensive coverage with investment benefits. Tax-free maturity proceeds under Section 10(10D).</div>
+        <a class="service-link" href="#">Get Covered →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🧾</div>
+        <div class="service-title">Tax Planning</div>
+        <div class="service-desc">Smart tax-saving strategies using ELSS, PPF, NPS, and more. Save up to ₹1.5 lakh under Section 80C and ₹50,000 extra with NPS under Section 80CCD(1B).</div>
+        <a class="service-link" href="#">Save Tax Now →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">🎯</div>
+        <div class="service-title">Goal-Based Planning</div>
+        <div class="service-desc">Whether it's retirement, children's education, or buying a home — we create a personalized financial roadmap with milestone tracking and regular reviews.</div>
+        <a class="service-link" href="#">Plan My Goals →</a>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-icon">📊</div>
+        <div class="service-title">Portfolio Review</div>
+        <div class="service-desc">Get a free health check of your existing investments. Our advisors identify gaps, rebalance allocations, and optimize your portfolio for maximum risk-adjusted returns.</div>
+        <a class="service-link" href="#">Free Review →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TAX FREE INCOME -->
+<section class="taxfree" id="taxfree">
+  <div class="section-inner">
+    <div class="taxfree-grid">
+      <div>
+        <div class="reveal">
+          <div class="section-tag">Tax Planning</div>
+          <h2 class="section-title">Paying taxes is a <span class="highlight">Best Practice</span> — earning <span class="gold">Tax-Free Income</span> is even better!</h2>
+          <p class="section-desc">There are several investment avenues that provide completely tax-free income through survival benefits, staggered maturity, dividends, and long-term equity redemptions. Choose the right one for your age, horizon, and risk appetite.</p>
+        </div>
+        <div class="reveal">
+          <div class="route-accordion">
+            <button class="route-btn open" onclick="toggleRoute(this)">
+              <span>Tax Free Route #1 <span class="tag">Dividends in MF</span></span>
+              <span class="arrow">›</span>
+            </button>
+            <div class="route-content open">
+              Under Section 10(34) & (35), dividend income from mutual fund units is completely exempt from income tax. Choose the best dividend schemes as per our recommendation or pick on your own and invest online.
+              <div class="route-footer">
+                <a href="#">Choose on your own</a>
+                <a href="#">Need help?</a>
+              </div>
+            </div>
+          </div>
+          <div class="route-accordion">
+            <button class="route-btn" onclick="toggleRoute(this)">
+              <span>Tax Free Route #2 <span class="tag">Long Term Capital Gains</span></span>
+              <span class="arrow">›</span>
+            </button>
+            <div class="route-content">
+              Equity mutual fund gains held for more than 1 year are tax-free up to ₹1 lakh per year under Section 10(38). Beyond that, LTCG is taxed at just 10% — significantly lower than your income tax slab.
+              <div class="route-footer">
+                <a href="#">Choose on your own</a>
+                <a href="#">Need help?</a>
+              </div>
+            </div>
+          </div>
+          <div class="route-accordion">
+            <button class="route-btn" onclick="toggleRoute(this)">
+              <span>Tax Free Route #3 <span class="tag">Proceeds from Insurance Co.</span></span>
+              <span class="arrow">›</span>
+            </button>
+            <div class="route-content">
+              Maturity proceeds from life insurance policies (term, endowment, ULIPs) are completely tax-free under Section 10(10D), provided the premium is within 10% of the sum assured. An excellent long-term wealth creation tool.
+              <div class="route-footer">
+                <a href="#">Choose on your own</a>
+                <a href="#">Need help?</a>
+              </div>
+            </div>
+          </div>
+          <div class="route-accordion">
+            <button class="route-btn" onclick="toggleRoute(this)">
+              <span>Tax Free Route #4 <span class="tag">Interest from Special Bonds</span></span>
+              <span class="arrow">›</span>
+            </button>
+            <div class="route-content">
+              Certain government bonds and infrastructure bonds offer tax-free interest income. REC, NHAI, and similar bonds under Section 10(15) provide attractive, completely tax-exempt interest annually.
+              <div class="route-footer">
+                <a href="#">Choose on your own</a>
+                <a href="#">Need help?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="calc-box">
+          <div class="calc-title">Tax Savings Calculator</div>
+          <div class="calc-sub">See how much you save depending on your tax slab</div>
+          <div class="calc-label">If you are investing monthly</div>
+          <div class="calc-display" id="calcDisplay">₹ 1,000</div>
+          <input type="range" class="calc-range" id="calcRange" min="500" max="100000" step="500" value="1000" oninput="updateCalc(this.value)">
+          <div class="calc-label" style="margin-bottom:14px">Depending on your tax-slab, you will save:</div>
+          <div class="calc-grid">
+            <div class="calc-slab">
+              <div class="calc-slab-num" id="slab1">₹103</div>
+              <div class="calc-slab-lbl">10% Slab</div>
+            </div>
+            <div class="calc-slab">
+              <div class="calc-slab-num" id="slab2">₹206</div>
+              <div class="calc-slab-lbl">20% Slab</div>
+            </div>
+            <div class="calc-slab">
+              <div class="calc-slab-num" id="slab3">₹309</div>
+              <div class="calc-slab-lbl">30% Slab</div>
+            </div>
+          </div>
+          <div class="calc-note">* Calculations based on ELSS investments under Section 80C. Maximum deduction limit is ₹1,50,000 per year. Consult your tax advisor for exact savings.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIP CALCULATOR -->
+<section class="sip-section" id="sip">
+  <div class="section-inner">
+    <div class="sip-grid">
+      <div class="reveal">
+        <div class="section-tag">SIP Planner</div>
+        <h2 class="section-title">Watch Your Money <span class="highlight">Grow</span> with SIP</h2>
+        <p class="section-desc">Systematic Investment Plans (SIP) let you invest small amounts regularly and benefit from rupee cost averaging and compounding. Start with as little as ₹500/month.</p>
+        <div style="margin-top:28px; display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex;gap:12px;align-items:center;padding:16px;background:white;border-radius:12px;border:1px solid var(--border)">
+            <span style="font-size:24px">🔄</span>
+            <div>
+              <div style="font-weight:600;color:var(--navy);font-size:14px">Rupee Cost Averaging</div>
+              <div style="font-size:13px;color:var(--text-mid)">Buy more units when prices are low, fewer when high. Reduces average cost over time.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;padding:16px;background:white;border-radius:12px;border:1px solid var(--border)">
+            <span style="font-size:24px">📊</span>
+            <div>
+              <div style="font-weight:600;color:var(--navy);font-size:14px">Power of Compounding</div>
+              <div style="font-size:13px;color:var(--text-mid)">Returns generate more returns. Time is your biggest asset in wealth creation.</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:center;padding:16px;background:white;border-radius:12px;border:1px solid var(--border)">
+            <span style="font-size:24px">💼</span>
+            <div>
+              <div style="font-weight:600;color:var(--navy);font-size:14px">Discipline & Automation</div>
+              <div style="font-size:13px;color:var(--text-mid)">Auto-debit every month ensures consistent investing without market timing stress.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="sip-calc-ui">
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:24px;">SIP Returns Calculator</div>
+          <div class="sip-field">
+            <label>Monthly Investment <span class="sip-field-val" id="sipAmt">₹5,000</span></label>
+            <input type="range" min="500" max="50000" step="500" value="5000" oninput="updateSip()">
+          </div>
+          <div class="sip-field">
+            <label>Investment Period <span class="sip-field-val" id="sipYrs">10 yrs</span></label>
+            <input type="range" min="1" max="30" step="1" value="10" oninput="updateSip()">
+          </div>
+          <div class="sip-field">
+            <label>Expected Return (p.a.) <span class="sip-field-val" id="sipRate">12%</span></label>
+            <input type="range" min="6" max="20" step="0.5" value="12" oninput="updateSip()">
+          </div>
+          <div class="sip-result">
+            <div class="sip-res-item">
+              <div class="lbl">Amount Invested</div>
+              <div class="val" id="sipInvested">₹6,00,000</div>
+            </div>
+            <div class="sip-res-item">
+              <div class="lbl">Est. Returns</div>
+              <div class="val gold" id="sipReturns">₹5,55,177</div>
+            </div>
+            <div class="sip-res-item" style="grid-column:1/-1;border-top:1px solid rgba(255,255,255,0.15);padding-top:16px;margin-top:4px">
+              <div class="lbl">Total Corpus</div>
+              <div class="val gold" style="font-size:32px" id="sipTotal">₹11,55,177</div>
+            </div>
+          </div>
+          <div style="margin-top:18px;text-align:center">
+            <a class="btn-hero-primary" href="#contact" style="display:inline-block;font-size:14px;padding:12px 28px">Start SIP Now →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY FINSECURE -->
+<section class="why" id="why">
+  <div class="why-grid">
+    <div>
+      <div class="reveal">
+        <div class="section-tag" style="color:#5de8a0">Why Choose Us</div>
+        <h2 class="section-title" style="color:white">Trusted by <span style="color:var(--gold-light)">50,000+</span> Investors Across India</h2>
+        <p class="section-desc">We combine SEBI-registered expertise with cutting-edge technology to deliver personalized financial solutions that work.</p>
+      </div>
+      <div class="why-features reveal">
+        <div class="why-feat">
+          <div class="why-feat-icon">🏛️</div>
+          <div class="why-feat-title">SEBI Registered</div>
+          <div class="why-feat-desc">Fully licensed and regulated investment advisor. Your interests are always protected.</div>
+        </div>
+        <div class="why-feat">
+          <div class="why-feat-icon">🎯</div>
+          <div class="why-feat-title">Goal-Based Advice</div>
+          <div class="why-feat-desc">Tailored investment strategies based on your specific life goals and timeline.</div>
+        </div>
+        <div class="why-feat">
+          <div class="why-feat-icon">📱</div>
+          <div class="why-feat-title">Digital First</div>
+          <div class="why-feat-desc">Track, manage and grow your portfolio anytime from our intuitive dashboard.</div>
+        </div>
+        <div class="why-feat">
+          <div class="why-feat-icon">🤝</div>
+          <div class="why-feat-title">Dedicated Advisor</div>
+          <div class="why-feat-desc">A personal relationship manager for all your queries and portfolio reviews.</div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual reveal">
+      <div class="trust-card">
+        <div class="trust-numbers">
+          <div class="trust-num"><div class="n">50K+</div><div class="l">Investors</div></div>
+          <div class="trust-num"><div class="n">₹500Cr</div><div class="l">AUM</div></div>
+          <div class="trust-num"><div class="n">18+</div><div class="l">Years</div></div>
+          <div class="trust-num"><div class="n">4.9★</div><div class="l">Rating</div></div>
+        </div>
+        <div class="trust-badges">
+          <span class="trust-badge">✓ SEBI Registered</span>
+          <span class="trust-badge">✓ AMFI Certified</span>
+          <span class="trust-badge">✓ IRDAI Licensed</span>
+          <span class="trust-badge">✓ ISO 27001</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE CENTER -->
+<section class="knowledge" id="knowledge">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <div class="section-tag" style="text-align:center">Knowledge Center</div>
+      <h2 class="section-title" style="text-align:center">Learn, <span class="highlight">Grow</span> & Invest Smarter</h2>
+      <p class="section-desc" style="margin:0 auto;text-align:center">Expert articles and guides to help you make informed financial decisions.</p>
+    </div>
+    <div class="knowledge-grid">
+      <div class="k-card reveal">
+        <div class="k-thumb k-thumb-mf"><span>📈</span><span class="k-tag">Mutual Funds</span></div>
+        <div class="k-body">
+          <div class="k-title">How Does SIP Work? A Complete Beginner's Guide</div>
+          <div class="k-desc">Understand the mechanics of Systematic Investment Plans, how rupee cost averaging works, and why SIP is the smartest way to build wealth over time with discipline.</div>
+          <div class="k-meta"><a class="k-read" href="#">Read Article →</a><span class="k-time">8 min read</span></div>
+        </div>
+      </div>
+      <div class="k-card reveal">
+        <div class="k-thumb k-thumb-sip"><span>💸</span><span class="k-tag">Tax Planning</span></div>
+        <div class="k-body">
+          <div class="k-title">Top 10 Tax-Saving Investments under Section 80C</div>
+          <div class="k-desc">From ELSS to PPF, NPS to Tax-Saving FDs — compare all Section 80C options on returns, lock-in period, liquidity, and tax treatment to maximize your savings.</div>
+          <div class="k-meta"><a class="k-read" href="#">Read Article →</a><span class="k-time">12 min read</span></div>
+        </div>
+      </div>
+      <div class="k-card reveal">
+        <div class="k-thumb k-thumb-tax"><span>🛡️</span><span class="k-tag">Insurance</span></div>
+        <div class="k-body">
+          <div class="k-title">Term vs ULIP vs Endowment: Which Insurance is Right for You?</div>
+          <div class="k-desc">A detailed comparison of insurance types — understand the difference between pure protection and investment-linked plans, and find which one suits your needs.</div>
+          <div class="k-meta"><a class="k-read" href="#">Read Article →</a><span class="k-time">10 min read</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px" class="reveal">
+      <a href="#" style="display:inline-block;padding:14px 36px;border-radius:10px;background:var(--emerald-pale);color:var(--emerald);font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid rgba(26,124,79,0.2);transition:all .25s" onmouseover="this.style.background='var(--emerald)';this.style.color='white'" onmouseout="this.style.background='var(--emerald-pale)';this.style.color='var(--emerald)'">View All Articles →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-inner">
+    <div class="reveal" style="text-align:center;margin-bottom:48px">
+      <div class="section-tag" style="text-align:center">Client Stories</div>
+      <h2 class="section-title" style="text-align:center">What Our <span class="highlight">Clients</span> Say</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"Finsecure helped me understand investing for the first time. My SIP of ₹10,000/month has grown to ₹18 lakhs in 7 years. The advisors are incredibly patient and knowledgeable. Highly recommend!"</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--emerald),var(--navy))">R</div>
+          <div><div class="testi-name">Rajesh Sharma</div><div class="testi-role">Business Owner, Delhi</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"The tax planning advice saved me ₹45,000 last year alone. They reviewed my entire portfolio and suggested ELSS funds I hadn't considered. My returns improved by 3% after rebalancing. Outstanding service!"</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--gold),#e07b00)">P</div>
+          <div><div class="testi-name">Priya Menon</div><div class="testi-role">IT Professional, Bangalore</div></div>
+        </div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-text">"I was skeptical at first, but the dedicated advisor assigned to me spent 2 hours understanding my goals. The plan for my daughter's education and my retirement is crystal clear now. True financial peace of mind."</div>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,var(--crimson),#8b0000)">A</div>
+          <div><div class="testi-name">Amit Desai</div><div class="testi-role">Doctor, Mumbai</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="reveal">
+    <h2>Ready to Secure Your Financial Future?</h2>
+    <p>Join 50,000+ smart investors. Get a free portfolio review and personalized investment plan today.</p>
+    <div class="cta-strip-btns">
+      <a class="btn-white" href="#contact">Get Free Consultation</a>
+      <a class="btn-outline-white2" href="#sip">Calculate Returns</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="reveal">
+          <div class="section-tag">Get In Touch</div>
+          <h2 class="section-title">Let's Plan Your <span class="highlight">Financial</span> Journey Together</h2>
+          <p class="section-desc">Book a free consultation with our certified advisors. No obligation, just clarity about your financial future.</p>
+        </div>
+        <div class="contact-info-cards reveal">
+          <div class="contact-info-card">
+            <div class="contact-info-icon">📞</div>
+            <div><div class="contact-info-label">Call Us</div><div class="contact-info-value">+91 98765 43210</div></div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">📧</div>
+            <div><div class="contact-info-label">Email Us</div><div class="contact-info-value">hello@finsecure.in</div></div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">📍</div>
+            <div><div class="contact-info-label">Office</div><div class="contact-info-value">Connaught Place, New Delhi — 110001</div></div>
+          </div>
+          <div class="contact-info-card">
+            <div class="contact-info-icon">🕒</div>
+            <div><div class="contact-info-label">Working Hours</div><div class="contact-info-value">Mon–Sat, 9:00 AM – 7:00 PM</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <div class="form-title">Book a Free Consultation</div>
+        <div class="form-sub">Fill in the details and we'll reach out within 24 hours.</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Rajesh">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Sharma">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" placeholder="+91 98765 43210">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="rajesh@email.com">
+        </div>
+        <div class="form-group">
+          <label>Area of Interest</label>
+          <select>
+            <option>Select a service...</option>
+            <option>Mutual Funds / SIP</option>
+            <option>Tax Planning (ELSS / 80C)</option>
+            <option>Life & Health Insurance</option>
+            <option>Fixed Income / Bonds</option>
+            <option>Retirement Planning</option>
+            <option>Portfolio Review</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Message (optional)</label>
+          <textarea placeholder="Tell us about your financial goals..."></textarea>
+        </div>
+        <button class="btn-submit" onclick="handleSubmit(event)">Book Free Consultation →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="#">
+        <div class="logo-icon">F</div>
+        <div class="logo-text">
+          <div class="brand">FINSECURE</div>
+          <div class="tagline">Your Money. Our Expertise.</div>
+        </div>
+      </a>
+      <p style="margin-top:16px">India's trusted financial advisory platform. SEBI registered. Over 18 years of helping Indians build wealth, save tax, and secure their future.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="#">in</a>
+        <a class="social-btn" href="#">f</a>
+        <a class="social-btn" href="#">𝕏</a>
+        <a class="social-btn" href="#">▶</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#">Mutual Funds</a></li>
+        <li><a href="#">SIP Investment</a></li>
+        <li><a href="#">Fixed Income</a></li>
+        <li><a href="#">Life Insurance</a></li>
+        <li><a href="#">Health Insurance</a></li>
+        <li><a href="#">Tax Planning</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Company</div>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Downloads</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Legal</div>
+      <ul class="footer-links">
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Disclaimer</a></li>
+        <li><a href="#">SEBI Disclosure</a></li>
+        <li><a href="#">Grievance Redressal</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Finsecure Financial Services Pvt. Ltd. | SEBI Reg. No: INA000012345 | AMFI ARN: 123456</p>
+    <span class="sebi-badge">SEBI Registered</span>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Goal bar toggle
+  function setGoal(el) {
+    document.querySelectorAll('.goal-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Route accordion
+  function toggleRoute(btn) {
+    const content = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.route-btn').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
+    if (!isOpen) { btn.classList.add('open'); content.classList.add('open'); }
+  }
+
+  // Tax calc
+  function fmtINR(n) {
+    if (n >= 100000) return '₹' + (n/100000).toFixed(1) + 'L';
+    if (n >= 1000) return '₹' + Math.round(n/1000) + 'K';
+    return '₹' + Math.round(n);
+  }
+
+  function updateCalc(val) {
+    val = parseInt(val);
+    document.getElementById('calcDisplay').textContent = '₹ ' + val.toLocaleString('en-IN');
+    document.getElementById('slab1').textContent = fmtINR(val * 0.103);
+    document.getElementById('slab2').textContent = fmtINR(val * 0.206);
+    document.getElementById('slab3').textContent = fmtINR(val * 0.309);
+  }
+
+  // SIP calc
+  function updateSip() {
+    const sliders = document.querySelectorAll('.sip-field input[type=range]');
+    const monthly = parseInt(sliders[0].value);
+    const years = parseInt(sliders[1].value);
+    const rate = parseFloat(sliders[2].value);
+    document.getElementById('sipAmt').textContent = '₹' + monthly.toLocaleString('en-IN');
+    document.getElementById('sipYrs').textContent = years + ' yrs';
+    document.getElementById('sipRate').textContent = rate + '%';
+    const months = years * 12;
+    const r = rate / 100 / 12;
+    const fv = monthly * ((Math.pow(1+r, months) - 1) / r) * (1+r);
+    const invested = monthly * months;
+    const returns = fv - invested;
+    const fmt = (n) => {
+      if (n >= 10000000) return '₹' + (n/10000000).toFixed(2) + 'Cr';
+      if (n >= 100000) return '₹' + (n/100000).toFixed(2) + 'L';
+      return '₹' + Math.round(n).toLocaleString('en-IN');
+    };
+    document.getElementById('sipInvested').textContent = fmt(invested);
+    document.getElementById('sipReturns').textContent = fmt(returns);
+    document.getElementById('sipTotal').textContent = fmt(fv);
+  }
+  updateSip();
+
+  // Intersection observer for reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Form submit
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target;
+    btn.textContent = '✓ Request Sent! We\'ll call you within 24 hrs.';
+    btn.style.background = 'linear-gradient(135deg, #15803d, #16a34a)';
+    setTimeout(() => { btn.textContent = 'Book Free Consultation →'; btn.style.background = ''; }, 4000);
+  }
+
+  // Mobile menu
+  function toggleMenu() {
+    const links = document.querySelector('.nav-links');
+    if (!links) return;
+    if (links.style.display === 'flex') {
+      links.style.display = '';
+    } else {
+      links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:#0b1f3a;padding:20px;gap:8px;z-index:999;border-top:1px solid rgba(255,255,255,0.08)';
+    }
+  }
+</script>
+</body>
+</html>
